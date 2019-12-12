@@ -2,6 +2,7 @@ function [PI,A,B,alpha,beta,gamma,epsilons] = myBaumWelch(spikes,nStates,dt,maxI
 nNeurons = size(spikes,1);
 nTimeSteps = size(spikes,2);
 poiss = @(lambda,n) ((lambda*dt).^n./factorial(n)).*exp(-lambda*dt);
+minFR = (1/(nTimeSteps*dt));
 % Initialize parameter estimates
 PI = ones(nStates,1)*(1/nStates); % Initial state distribution
 A = zeros(nStates,nStates); % Transition Matrix (columns = post, rows = pre)
@@ -51,6 +52,7 @@ while (notConverged && (iterNum < maxIter))
     A = Anumer./Adenom;
     A = A./sum(A,2);
     B = ((spikes*gamma')./sum(gamma,2)')/dt;
+    B = max(minFR,B);
     % check for convergence
     notConverged = isConverged(oldPI,oldA,oldB,PI,A,B);
     iterNum=iterNum+1;

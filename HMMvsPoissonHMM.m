@@ -1,9 +1,9 @@
 % HMM vs. poissHMM
 clear all;
-nNeurons = 50;
+nNeurons = 1000;
 nActualStates = 3;
 nPredictedStates = 3;
-maxFR = 10;
+maxFR = 15;
 stateSeqLength = 10;
 dt = .01;
 maxIterations = 100;
