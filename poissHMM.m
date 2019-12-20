@@ -7,8 +7,8 @@ function [bestPath,maxPathLogProb,PI,A,B,gamma] = poissHMM(spikes,nStates,dt,max
 % maxIter - maximum number of iterations through the data
 
 % Estimate state transition matrix and firing rates
-[PI,A,B,alpha,beta,gamma,epsilons] = myBaumWelch(spikes,nStates,dt,maxIter);
+[PI,A,B,alpha,beta,gamma,epsilons] = poissBaumWelch(spikes,nStates,dt,maxIter);
 % Get most likely state sequence
-[bestPath,maxPathLogProb,T1,T2] = myViterbi(spikes,PI,A,B,dt);
+[bestPath,maxPathLogProb,T1,T2] = poissViterbi(spikes,PI,A,B,dt);
 end
 
