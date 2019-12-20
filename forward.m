@@ -1,5 +1,6 @@
 function [alpha,norms] = forward(spikes,nStates,dt,PI,A,B)
 % Written by Ben Ballintyn (bbal@brandeis.edu) 12/2019.
+%
 % [alpha,norms] = forward(spikes,nStates,dt,PI,A,B)
 % Run forward algorithm to compute alpha = P(Xt = i | o1...ot,pi)
 % Inputs:

@@ -1,5 +1,6 @@
-function [bestPath,maxPathLogProb,T1,T2] = myViterbi(spikes,PI,A,B,dt)
+function [bestPath,maxPathLogProb,T1,T2] = poissViterbi(spikes,PI,A,B,dt)
 % Written by Ben Ballintyn (bbal@brandeis.edu) 12/2019.
+% 
 % [bestPath,maxPathProb,T1,T2] = myViterbi(spikes,PI,A,B,dt)
 % Use a lightly modified viterbi algorithm to compute the most likely path
 % through a sequence of hidden states given spike counts from N neurons and

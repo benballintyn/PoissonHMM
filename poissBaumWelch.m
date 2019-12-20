@@ -1,5 +1,6 @@
 function [PI,A,B,alpha,beta,gamma,epsilons] = poissBaumWelch(spikes,nStates,dt,maxIter)
 % Written by Ben Ballintyn (bbal@brandeis.edu) 12/2019.
+%
 % [PI,A,B,alpha,beta,gamma,epsilons] = poissBaumWelch(spikes,nStates,dt,maxIter)
 % Estimate the initial state probabilities (PI), transition matrix (A), and
 % emission matrix (B) using the forward and backward algorithms

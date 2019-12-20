@@ -1,5 +1,6 @@
 function [beta] = backward(spikes,nStates,dt,A,B,norms)
 % Written by Ben Ballintyn (bbal@brandeis.edu) 12/2019.
+%
 % [beta] = backward(spikes,nStates,dt,A,B,norms)
 % Given the norms from the forward algorithm, compute beta(s,t) = P(ot+1...oT | Xt = s)
 % Inputs:
