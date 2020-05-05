@@ -67,14 +67,14 @@ while (notConverged && (iterNum < maxIter))
             epsilonNumerator = zeros(nStates,nStates);
             for si=1:nStates
                 for sj=1:nStates
-                    epsilonNumerator(si,sj) = alpha(si,t)*A(si,sj)*beta(sj,t)*prod(poiss(B(:,sj),spikes(:,t+1)));
+                    epsilonNumerator(si,sj) = alpha(si,t)*A(si,sj)*beta(sj,t+1)*prod(poiss(B(:,sj),spikes(:,t+1)));
                 end
             end
             epsilons(:,:,t) = epsilonNumerator./sum(epsilonNumerator(:));
         end
     end
     
-    % stor old paramters for convergence check
+    % store old paramters for convergence check
     oldPI = PI;
     oldA = A;
     oldB = B;
@@ -105,4 +105,3 @@ else
     notConverged = 1;
 end
 end
-
