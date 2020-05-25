@@ -1,6 +1,6 @@
 % HMM vs. poissHMM
 clear all;
-nNeurons = 1000;
+nNeurons = 100;
 nActualStates = 3;
 nPredictedStates = 3;
 maxFR = 15;
@@ -13,24 +13,24 @@ stateSeq = ceil(rand(1,stateSeqLength)*nActualStates);
 rates = ceil(rand(nNeurons,nActualStates)*maxFR);
 [spikes,stateSeqDurs,stateSeqVec] = genPoissSpikes(rates,stateSeq,dt,stateDurMeans,stateDurStds);
 
-
+%%
 for i=1:size(spikes,2)
     spikingNeurons = find(spikes(:,i) > 0);
     if (length(spikingNeurons) > 1)
         ind = ceil(rand*length(spikingNeurons));
         v = zeros(nNeurons,1); v(ind) = 1;
         soloSpikes(:,i) = v;
-        symbols(i) = ind+1;
+        symbols(i) = spikingNeurons(ind)+1;
     elseif (length(spikingNeurons) == 1)
         v=zeros(nNeurons,1); v(spikingNeurons) = 1;
-        soloSpikes(:,i) = v+1;
-        symbols(i) = spikingNeurons;
+        soloSpikes(:,i) = v;
+        symbols(i) = spikingNeurons+1;
     else
         soloSpikes(:,i) = zeros(nNeurons,1);
         symbols(i) = 1;
     end
 end
-
+%%
 % poissHMM
 [bestPath,maxPathLogProb,PI,A,B,gamma] = poissHMM(spikes,nPredictedStates,dt,maxIterations);
 
