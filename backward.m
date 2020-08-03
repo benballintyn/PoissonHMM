@@ -25,15 +25,10 @@ poiss = @(lambda,n) ((lambda*dt).^n./factorial(n)).*exp(-lambda*dt); % formula f
 nTimeSteps = size(spikes,2);
 beta = zeros(nStates,nTimeSteps);
 beta(:,end) = 1; % Initialize final beta to be 1 for all states
-isSingleNeuron = size(B,1) == 1;
 % Stepping backward in time, compute betas
 for t=fliplr(1:(nTimeSteps-1))
     for s=1:nStates
-        if (isSingleNeuron)
-            beta(s,t) = sum(beta(:,t+1).*A(s,:)'.*poiss(B,spikes(:,t+1))');
-        else
-            beta(s,t) = sum(beta(:,t+1).*A(s,:)'.*prod(poiss(B,spikes(:,t+1)))'); % making change (08/03)
-        end
+        beta(s,t) = sum(beta(:,t+1).*A(s,:)'.*prod(poiss(B,spikes(:,t+1)),1)'); % making change (08/03)
     end
     beta(:,t) = beta(:,t)./norms(t+1); % scale each beta by norms from forward pass
 end
